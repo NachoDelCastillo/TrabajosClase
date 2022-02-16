@@ -131,7 +131,6 @@ Mesh* Mesh::generaRectangulo(GLdouble w, GLdouble h) {
 
     mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
-
     // CREAR VERTICES
 
     mesh->mNumVertices = 4;
@@ -207,4 +206,42 @@ Mesh* Mesh::generaCubo(GLdouble l) {
     mesh->vVertices.emplace_back(-h, h, h);
 
     return mesh;
+}
+
+
+
+Mesh* Mesh::generaCuboTriangulosRGB(GLdouble l) {
+
+
+    Mesh* mesh = new Mesh();
+
+    mesh->mPrimitive = GL_TRIANGLES;
+
+    // CREAR VERTICES
+
+    mesh->mNumVertices = 32;
+    mesh->vVertices.reserve(mesh->mNumVertices);
+
+    GLdouble h = l / 2;
+
+
+    // Primera cara
+    mesh->vVertices.emplace_back(-h, h, h);
+    mesh->vVertices.emplace_back(-h, -h, h);
+    mesh->vVertices.emplace_back(h, h, h);
+
+    mesh->vVertices.emplace_back(h, h, h);
+    mesh->vVertices.emplace_back(-h, -h, h);
+    mesh->vVertices.emplace_back(h, -h, h);
+
+
+    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+
+    return mesh;
+
 }

@@ -33,9 +33,12 @@ void Scene::init()
 	// PASO 5
 	gObjects.push_back(new TrianglesRGB());
 
+	// PASO 7
+	//gObjects.push_back(new RectanguloRGB(30, 60));
+
 
 	// PASO 6ne
-	//gObjects.push_back(new Cubo(100));
+	gObjects.push_back(new Cubo(100));
 
 
 	//gObjects.push_back(new Mesh)

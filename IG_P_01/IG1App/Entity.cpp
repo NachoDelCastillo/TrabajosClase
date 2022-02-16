@@ -87,9 +87,14 @@ TrianglesRGB::~TrianglesRGB()
 void TrianglesRGB::render(dmat4 const& modelViewMat) const
 {
 	if (mMesh != nullptr) {
+
+		glPolygonMode(GL_BACK, GL_POINT);
+
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
 		upload(aMat);
 		mMesh->render();
+
+		glPolygonMode(GL_BACK, GL_FILL);
 	}
 }
 
@@ -128,7 +133,9 @@ void RectanguloRGB::render(dmat4 const& modelViewMat) const
 
 Cubo::Cubo(GLdouble l) : Abs_Entity()
 {
-	mMesh = Mesh::generaCubo(l);
+	//mMesh = Mesh::generaCubo(l);
+
+	mMesh = Mesh::generaCuboTriangulosRGB(l);
 }
 
 Cubo::~Cubo()

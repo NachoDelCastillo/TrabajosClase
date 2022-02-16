@@ -26,6 +26,7 @@ public:
 
 	static Mesh* generaCubo(GLdouble l); // creates a new 3D-RGB axes mesh
 
+	static Mesh* generaCuboTriangulosRGB(GLdouble l); // creates a new 3D-RGB axes mesh
 
 	
 	Mesh() {};
