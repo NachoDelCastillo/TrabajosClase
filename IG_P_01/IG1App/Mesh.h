@@ -19,6 +19,8 @@ public:
 
 	static Mesh* generaPoligonoRegular(GLuint num, GLdouble r); // creates a new 3D-RGB axes mesh
 
+	static Mesh* createTriangleRGBconAltura();
+
 
 	static Mesh* generaRectangulo(GLdouble w, GLdouble h); // creates a new 3D-RGB axes mesh
 	static Mesh* generaRectanguloRGB(GLdouble w, GLdouble h); // creates a new 3D-RGB axes mesh

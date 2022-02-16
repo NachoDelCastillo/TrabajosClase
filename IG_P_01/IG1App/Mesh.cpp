@@ -124,6 +124,30 @@ Mesh* Mesh::createTriangleRGB() {
     return mesh;
 }
 
+Mesh* Mesh::createTriangleRGBconAltura() {
+
+    Mesh* mesh = new Mesh;
+
+    mesh->mPrimitive = GL_TRIANGLES;
+    //mesh->mPrimitive = GL_TRIANGLE_STRIP;
+
+    mesh->mNumVertices = 3;
+    mesh->vVertices.reserve(mesh->mNumVertices);
+
+    mesh->vVertices.emplace_back(0, 275, 0);
+    mesh->vVertices.emplace_back(-50, 225, 0);
+    mesh->vVertices.emplace_back(50, 225, 0);
+
+
+    mesh->vColors.reserve(mesh->mNumVertices);
+
+    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+
+    return mesh;
+}
+
 
 // RECTANGULO
 

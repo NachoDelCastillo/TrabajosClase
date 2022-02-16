@@ -88,6 +88,15 @@ void IG1App::free()
 }
 //-------------------------------------------------------------------------
 
+void IG1App::update() {
+
+	//mLastUpdateTime = glutGet(GLUT_ELAPSED_TIME);
+
+
+
+}
+//-------------------------------------------------------------------------
+
 void IG1App::display() const   
 {  // double buffering
 

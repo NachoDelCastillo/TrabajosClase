@@ -76,9 +76,10 @@ void Poligono::render(dmat4 const& modelViewMat) const
 
 TrianglesRGB::TrianglesRGB() : Abs_Entity()
 {
-	mMesh = Mesh::createTriangleRGB();
+	//mMesh = Mesh::createTriangleRGB();
+	mMesh = Mesh::createTriangleRGBconAltura();
 
-	mModelMat = translate(mModelMat, dvec3(0, 250, 0));
+	//mModelMat = translate(mModelMat, dvec3(0, 250, 0));
 }
 
 TrianglesRGB::~TrianglesRGB()

@@ -34,6 +34,9 @@ public:
 
 	void run();    // the main event processing loop
 	void close();  // the application
+
+
+	GLuint mLastUpdateTime = glutGet(GLUT_ELAPSED_TIME);
 	
 protected:
 
@@ -43,6 +46,8 @@ protected:
 	void init();
 	void iniWinOpenGL();
 	void free();   
+
+	void update();
  
 	void display() const;   // the scene
 	void resize(int newWidth, int newHeight);   // the viewport (without changing the scale) 
