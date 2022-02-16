@@ -70,8 +70,8 @@ Mesh* Mesh::generaPoligonoRegular(GLuint num, GLdouble r) {
     // Inicializar
     Mesh* mesh = new Mesh();
 
-    //mesh->mPrimitive = GL_LINE_LOOP;
-    mesh->mPrimitive = GL_TRIANGLE_STRIP;
+    mesh->mPrimitive = GL_LINE_LOOP;
+    //mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
     mesh->mNumVertices = num;
     mesh->vVertices.reserve(mesh->mNumVertices);
@@ -93,10 +93,9 @@ Mesh* Mesh::generaPoligonoRegular(GLuint num, GLdouble r) {
 
 Mesh* Mesh::createTriangleRGB() {
 
-    Mesh* mesh = new Mesh();
+    Mesh* mesh = generaPoligonoRegular(3, 50);
 
-    mesh->mPrimitive = GL_TRIANGLES;
-
+   // mesh->mPrimitive = GL_TRIANGLES;
 
     // CREAR VERTICES
 
@@ -107,7 +106,9 @@ Mesh* Mesh::createTriangleRGB() {
     //mesh->vVertices.emplace_back(-50, -50, 0.0);
     //mesh->vVertices.emplace_back(50, -50, 0.0);
 
-    mesh = generaPoligonoRegular(3, 50);
+    //mesh = generaPoligonoRegular(3, 50);
+
+    mesh->mPrimitive = GL_TRIANGLES;
 
 
     // CREAR COLORES
