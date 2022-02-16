@@ -14,6 +14,8 @@
 
 class Scene	
 { 
+	int mId = 0;
+
 public:
 	Scene() {};
 	~Scene() { free(); resetGL(); };
@@ -24,8 +26,13 @@ public:
 	void init();
 
     void render(Camera const& cam) const;
+
+	void setState(int id);
+
+	void update();
 	
 protected:
+
 	void free();
 	void setGL();
 	void resetGL();

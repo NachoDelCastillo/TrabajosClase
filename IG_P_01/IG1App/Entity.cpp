@@ -71,12 +71,14 @@ void Poligono::render(dmat4 const& modelViewMat) const
 }
 
 //-------------------------------------------------------------------------
- 
+
 // TRIANGULO RGB
 
 TrianglesRGB::TrianglesRGB() : Abs_Entity()
 {
 	mMesh = Mesh::createTriangleRGB();
+
+	mModelMat = translate(mModelMat, dvec3(0, 250, 0));
 }
 
 TrianglesRGB::~TrianglesRGB()
@@ -98,6 +100,11 @@ void TrianglesRGB::render(dmat4 const& modelViewMat) const
 	}
 }
 
+void TrianglesRGB::update() {
+	mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
+
+	//mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
+}
 
 //-------------------------------------------------------------------------
 
@@ -117,12 +124,14 @@ void RectanguloRGB::render(dmat4 const& modelViewMat) const
 {
 	if (mMesh != nullptr) {
 
-		glPolygonMode(GL_BACK, GL_POINT);
+		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_BACK, GL_LINE);
 
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
 		upload(aMat);
 		mMesh->render();
 
+		glPolygonMode(GL_FRONT, GL_FILL);
 		glPolygonMode(GL_BACK, GL_FILL);
 	}
 }
@@ -150,4 +159,8 @@ void Cubo::render(dmat4 const& modelViewMat) const
 		upload(aMat);
 		mMesh->render();
 	}
+}
+
+void Cubo::update() {
+	mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
 }

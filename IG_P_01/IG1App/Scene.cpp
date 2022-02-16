@@ -15,7 +15,25 @@ void Scene::init()
     // Textures
 
     // Graphics objects (entities) of the scene
+	
 	gObjects.push_back(new EjesRGB(400.0));
+
+
+	// ESCENA BIDIMENSIONAL
+	if (mId == 0) {
+		gObjects.push_back(new TrianglesRGB());
+		gObjects.push_back(new RectanguloRGB(500, 250));
+
+		auto circunferencia = new Poligono(32, 250);
+		circunferencia->setColor(glm::dvec4(1.0, 0, 1.0, 1.0));
+		gObjects.push_back(circunferencia);
+	}
+	// ESCENA TRIDIMENSIONAL
+	else if (mId == 1) {
+		gObjects.push_back(new Cubo(100));
+	}
+
+
 
 	// PASOS 2 & 3
 	//auto poligono = new Poligono(7, 100);
@@ -31,19 +49,34 @@ void Scene::init()
 	//gObjects.push_back(circunferencia);
 
 	// PASO 5
-	gObjects.push_back(new TrianglesRGB());
+	//gObjects.push_back(new TrianglesRGB());
 
 	// PASO 7
 	//gObjects.push_back(new RectanguloRGB(30, 60));
 
 
-	// PASO 6ne
-	gObjects.push_back(new Cubo(100));
+	//// PASO 6ne
+	//gObjects.push_back(new Cubo(100));
 
 
 	//gObjects.push_back(new Mesh)
 }
+
 //-------------------------------------------------------------------------
+
+void Scene::setState(int id)
+{
+	// Si no se cambia el valor, no hacer nada
+	if (id == mId) return;
+
+	free();
+	gObjects.clear();
+	mId = id;
+	init();
+}
+
+//-------------------------------------------------------------------------
+
 void Scene::free() 
 { // release memory and resources   
 
@@ -66,6 +99,15 @@ void Scene::resetGL()
 	glClearColor(.0, .0, .0, .0);  // background color (alpha=1 -> opaque)
 	glDisable(GL_DEPTH_TEST);  // disable Depth test 	
 }
+
+//-------------------------------------------------------------------------
+
+void Scene::update()
+{
+	for (int i = 0; i < gObjects.size(); i++)
+		gObjects[i]->update();
+}
+
 //-------------------------------------------------------------------------
 
 void Scene::render(Camera const& cam) const 

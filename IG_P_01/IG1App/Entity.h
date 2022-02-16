@@ -30,6 +30,8 @@ public:
 	// modeling matrix
 	glm::dmat4 const& modelMat() const { return mModelMat; };
 	void setModelMat(glm::dmat4 const& aMat) { mModelMat = aMat; };
+
+	virtual void update() {};
 	
 protected:
 
@@ -41,6 +43,7 @@ protected:
 	// transfers modelViewMat to the GPU
 	virtual void upload(glm::dmat4 const& mModelViewMat) const; 
 };
+
 //-------------------------------------------------------------------------
 
 class EjesRGB : public Abs_Entity 
@@ -71,6 +74,8 @@ public:
 	explicit TrianglesRGB();
 	~TrianglesRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+
+	virtual void update() override;
 };
 
 
@@ -91,6 +96,8 @@ public:
 	explicit Cubo(GLdouble l);
 	~Cubo();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
+	
+	virtual void update() override;
 };
 
 #endif //_H_Entities_H_
