@@ -71,13 +71,11 @@ Mesh* Mesh::generaPoligonoRegular(GLuint num, GLdouble r) {
     Mesh* mesh = new Mesh();
 
     mesh->mPrimitive = GL_LINE_LOOP;
-    //mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
     mesh->mNumVertices = num;
     mesh->vVertices.reserve(mesh->mNumVertices);
 
-
-    float gradosPorVertice = 360 / num;
+    float gradosPorVertice = 360.0 / num;
     float currentgradosVertice = 90;
 
     for (int i = 0; i < num; i++)
@@ -91,53 +89,13 @@ Mesh* Mesh::generaPoligonoRegular(GLuint num, GLdouble r) {
 
 // TRIANGULO
 
-Mesh* Mesh::createTriangleRGB() {
+Mesh* Mesh::createTriangleRGB(GLdouble r) {
 
-    Mesh* mesh = generaPoligonoRegular(3, 50);
-
-   // mesh->mPrimitive = GL_TRIANGLES;
-
-    // CREAR VERTICES
-
-    //mesh->mNumVertices = 3;
-    //mesh->vVertices.reserve(mesh->mNumVertices);
-
-    //mesh->vVertices.emplace_back(0.0, 50.0, 0.0);
-    //mesh->vVertices.emplace_back(-50, -50, 0.0);
-    //mesh->vVertices.emplace_back(50, -50, 0.0);
-
-    //mesh = generaPoligonoRegular(3, 50);
+    Mesh* mesh = generaPoligonoRegular(3, r);
 
     mesh->mPrimitive = GL_TRIANGLES;
-
 
     // CREAR COLORES
-
-    mesh->vColors.reserve(mesh->mNumVertices);
-
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-
-
-
-    return mesh;
-}
-
-Mesh* Mesh::createTriangleRGBconAltura() {
-
-    Mesh* mesh = new Mesh;
-
-    mesh->mPrimitive = GL_TRIANGLES;
-    //mesh->mPrimitive = GL_TRIANGLE_STRIP;
-
-    mesh->mNumVertices = 3;
-    mesh->vVertices.reserve(mesh->mNumVertices);
-
-    mesh->vVertices.emplace_back(0, 275, 0);
-    mesh->vVertices.emplace_back(-50, 225, 0);
-    mesh->vVertices.emplace_back(50, 225, 0);
-
 
     mesh->vColors.reserve(mesh->mNumVertices);
 
@@ -158,10 +116,8 @@ Mesh* Mesh::generaRectangulo(GLdouble w, GLdouble h) {
     mesh->mPrimitive = GL_TRIANGLE_STRIP;
 
     // CREAR VERTICES
-
     mesh->mNumVertices = 4;
     mesh->vVertices.reserve(mesh->mNumVertices);
-
 
     mesh->vVertices.emplace_back(-w/2, h/2, 0.0);
     mesh->vVertices.emplace_back(-w / 2, -h / 2, 0.0);
@@ -176,82 +132,30 @@ Mesh* Mesh::generaRectanguloRGB(GLdouble w, GLdouble h) {
 
     Mesh* mesh = generaRectangulo(w, h);
 
-
     // CREAR COLORES
-
     mesh->vColors.reserve(mesh->mNumVertices);
 
     mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
     mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
+    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
     mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
     return mesh;
 }
 
 
-Mesh* Mesh::generaCubo(GLdouble l) {
-
-    Mesh* mesh = new Mesh();
-
-    mesh->mPrimitive = GL_TRIANGLE_STRIP;
-
-    // CREAR VERTICES
-
-    mesh->mNumVertices = 17;
-    mesh->vVertices.reserve(mesh->mNumVertices);
-
-    GLdouble h = l / 2;
-
-    // Primera cara
-    mesh->vVertices.emplace_back(-h, h, h);
-    mesh->vVertices.emplace_back(-h, -h, h);
-    mesh->vVertices.emplace_back(h, h, h);
-    mesh->vVertices.emplace_back(h, -h, h);
-
-    // Primera cara
-    mesh->vVertices.emplace_back(h, h, -h);
-    mesh->vVertices.emplace_back(h, -h, -h);
-
-    // Cara inferior
-    mesh->vVertices.emplace_back(-h, -h, -h);
-    mesh->vVertices.emplace_back(h, -h, h);
-    mesh->vVertices.emplace_back(-h, -h, h);
-
-
-    mesh->vVertices.emplace_back(-h, h, h);
-    mesh->vVertices.emplace_back(-h, -h, -h);
-    mesh->vVertices.emplace_back(-h, h, -h);
-
-    mesh->vVertices.emplace_back(h, -h, -h);
-    mesh->vVertices.emplace_back(h, h, -h);
-
-    // Cara superior
-    mesh->vVertices.emplace_back(h, h, h);
-    mesh->vVertices.emplace_back(-h, h, -h);
-    mesh->vVertices.emplace_back(-h, h, h);
-
-    return mesh;
-}
-
-
-
-Mesh* Mesh::generaCuboTriangulosRGB(GLdouble l) {
-
+Mesh* Mesh::generaCubo(GLdouble longitud) {
 
     Mesh* mesh = new Mesh();
 
     mesh->mPrimitive = GL_TRIANGLES;
 
-    // CREAR VERTICES
-
     mesh->mNumVertices = 36;
     mesh->vVertices.reserve(mesh->mNumVertices);
 
-    GLdouble h = l / 2;
+    GLdouble h = longitud / 2;
 
-
-    // Cara frontal
+    //Cara frontal
     mesh->vVertices.emplace_back(-h, h, h);
     mesh->vVertices.emplace_back(-h, -h, h);
     mesh->vVertices.emplace_back(h, h, h);
@@ -259,96 +163,78 @@ Mesh* Mesh::generaCuboTriangulosRGB(GLdouble l) {
     mesh->vVertices.emplace_back(-h, -h, h);
     mesh->vVertices.emplace_back(h, -h, h);
 
-    // Cara derecha
+    //cara lateral derecha
+
     mesh->vVertices.emplace_back(h, h, h);
     mesh->vVertices.emplace_back(h, -h, h);
-    mesh->vVertices.emplace_back(h, -h, -h);
     mesh->vVertices.emplace_back(h, h, -h);
-    mesh->vVertices.emplace_back(h, h, h);
-    mesh->vVertices.emplace_back(h, -h, -h);
+    mesh->vVertices.emplace_back(h, h, -h);
+    mesh->vVertices.emplace_back(h, -h, h);
+    mesh->vVertices.emplace_back(h, -h, -h); 
 
-    // Cara trasera
+
+    //cara trasera
+    mesh->vVertices.emplace_back(-h, -h, -h);
+    mesh->vVertices.emplace_back(h, h, -h); 
+    mesh->vVertices.emplace_back(h, -h, -h);
+    mesh->vVertices.emplace_back(-h, -h, -h); 
+    mesh->vVertices.emplace_back(-h, h, -h); 
+    mesh->vVertices.emplace_back(h, h, -h); 
+
+    //cara lateral izquierda
+    mesh->vVertices.emplace_back(-h, h, -h); 
+    mesh->vVertices.emplace_back(-h, -h, -h); 
+    mesh->vVertices.emplace_back(-h, -h, h); 
     mesh->vVertices.emplace_back(-h, h, -h);
-    mesh->vVertices.emplace_back(-h, -h, -h);
-    mesh->vVertices.emplace_back(h, h, -h);
-    mesh->vVertices.emplace_back(h, h, -h);
-    mesh->vVertices.emplace_back(-h, -h, -h);
-    mesh->vVertices.emplace_back(h, -h, -h);
+    mesh->vVertices.emplace_back(-h, -h, h); 
+    mesh->vVertices.emplace_back(-h, h, h); 
 
-    // Cara izquierda
+    //cara de arriba
+    mesh->vVertices.emplace_back(-h, h, -h);
     mesh->vVertices.emplace_back(-h, h, h);
+    mesh->vVertices.emplace_back(h, h, -h);
+    mesh->vVertices.emplace_back(h, h, -h);
+    mesh->vVertices.emplace_back(-h, h, h); 
+    mesh->vVertices.emplace_back(h, h, h); 
+
+    //cara de abajo
     mesh->vVertices.emplace_back(-h, -h, h);
-    mesh->vVertices.emplace_back(-h, -h, -h);
-    mesh->vVertices.emplace_back(-h, h, -h);
-    mesh->vVertices.emplace_back(-h, h, h);
-    mesh->vVertices.emplace_back(-h, -h, -h);
-
-    // Cara superior
-    mesh->vVertices.emplace_back(-h, h, -h);
-    mesh->vVertices.emplace_back(-h, h, h);
-    mesh->vVertices.emplace_back(h, h, h);
-    mesh->vVertices.emplace_back(h, h, -h);
-    mesh->vVertices.emplace_back(-h, h, -h);
-    mesh->vVertices.emplace_back(h, h, h);
-
-    //// Cara inferior
-    mesh->vVertices.emplace_back(-h, -h, -h);
+    mesh->vVertices.emplace_back(-h, -h, -h); 
+    mesh->vVertices.emplace_back(h, -h, -h); 
+    mesh->vVertices.emplace_back(h, -h, -h); 
+    mesh->vVertices.emplace_back(h, -h, h); 
     mesh->vVertices.emplace_back(-h, -h, h);
-    mesh->vVertices.emplace_back(h, -h, h);
-    mesh->vVertices.emplace_back(h, -h, -h);
-    mesh->vVertices.emplace_back(-h, -h, -h);
-    mesh->vVertices.emplace_back(h, -h, h);
 
+    return mesh;
+}
+
+Mesh* Mesh::generaCuboTriangulosRGB(GLdouble longitud) {
+
+    Mesh* mesh = generaCubo(longitud);
 
     // COLORES
+    mesh->vColors.reserve(mesh->mNumVertices);
+    int vCara = 6;
 
     // Rojo // Cara frontal
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
+    for (int i = 0; i < vCara; i++)
+        mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
 
     // Verde // Cara derecha
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+    for (int i = 0; i < vCara; i++)
+        mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
 
     // Rojo // Cara trasera
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
+    for (int i = 0; i < vCara; i++)
+        mesh->vColors.emplace_back(1.0, 0.0, 0.0, 1.0);
 
     // Verde // Cara izquierda
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
+    for (int i = 0; i < vCara; i++)
+        mesh->vColors.emplace_back(0.0, 1.0, 0.0, 1.0);
 
     // Azul // Cara superior e inferior
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-    mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
-
+    for (int i = 0; i < vCara * 2; i++)
+        mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
     return mesh;
 }

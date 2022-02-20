@@ -74,12 +74,12 @@ void Poligono::render(dmat4 const& modelViewMat) const
 
 // TRIANGULO RGB
 
-TrianglesRGB::TrianglesRGB() : Abs_Entity()
+TrianglesRGB::TrianglesRGB(GLdouble r) : Abs_Entity()
 {
-	//mMesh = Mesh::createTriangleRGB();
-	mMesh = Mesh::createTriangleRGBconAltura();
+	mMesh = Mesh::createTriangleRGB(r);
 
-	//mModelMat = translate(mModelMat, dvec3(0, 250, 0));
+	// Decirle al triangulo a que distancia rotar del centro
+	//circleRadius = _circleRadius;
 }
 
 TrianglesRGB::~TrianglesRGB()
@@ -102,9 +102,14 @@ void TrianglesRGB::render(dmat4 const& modelViewMat) const
 }
 
 void TrianglesRGB::update() {
-	mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
 
-	//mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
+	// Rotar a lo largo del circulo (antihorario)
+	globalRotateAngle -= globalRotateSpeed;
+	mModelMat = translate(dmat4(1.0), dvec3(cos(radians(globalRotateAngle)) * circleRadius, sin(radians(globalRotateAngle)) * circleRadius, 0));
+
+	// Rotar el triangulo (horario)
+	rotateAngle -= rotateSpeed;
+	mModelMat = rotate(mModelMat, radians(rotateAngle), dvec3(0, 0, 1));
 }
 
 //-------------------------------------------------------------------------
@@ -126,14 +131,12 @@ void RectanguloRGB::render(dmat4 const& modelViewMat) const
 	if (mMesh != nullptr) {
 
 		glPolygonMode(GL_FRONT, GL_LINE);
-		glPolygonMode(GL_BACK, GL_LINE);
 
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
 		upload(aMat);
 		mMesh->render();
 
 		glPolygonMode(GL_FRONT, GL_FILL);
-		glPolygonMode(GL_BACK, GL_FILL);
 	}
 }
 
@@ -143,25 +146,75 @@ void RectanguloRGB::render(dmat4 const& modelViewMat) const
 
 Cubo::Cubo(GLdouble l) : Abs_Entity()
 {
-	//mMesh = Mesh::generaCubo(l);
+	//mMesh = Mesh::generaCuboTriangulosRGB(l);
+	mMesh = Mesh::generaCubo(l);
 
-	mMesh = Mesh::generaCuboTriangulosRGB(l);
+	//mMesh = Mesh::generaCuboTriangulosRGBparteOpcional(l);
+	//mModelMat = translate(mModelMat, dvec3(l/2, l/2, l/2));
 }
 
 Cubo::~Cubo()
 {
 	delete mMesh; mMesh = nullptr;
-};
+}
 
 void Cubo::render(dmat4 const& modelViewMat) const
 {
 	if (mMesh != nullptr) {
+
+		glPolygonMode(GL_FRONT, GL_LINE);
+		glPolygonMode(GL_BACK, GL_POINT);
+
+		glColor3d(0.0, 0.0, 0.0); // Pasa al color negro
+
+		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
+		upload(aMat);
+		mMesh->render();
+
+		glPolygonMode(GL_FRONT, GL_FILL);
+		glPolygonMode(GL_BACK, GL_FILL);
+
+		glColor3d(1.0, 1.0, 1.0); // Vuelve al color blanco
+	}
+}
+
+void Cubo::update() {
+
+	//mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
+	mModelMat = rotate(dmat4(1.0), radians(90.0), dvec3(0, 0, 1));
+}
+
+
+//-------------------------------------------------------------------------
+
+// CUBO
+
+CuboRGB::CuboRGB(GLdouble l) : Abs_Entity()
+{
+	//mMesh = Mesh::generaCuboTriangulosRGB(l);
+	mMesh = Mesh::generaCuboTriangulosRGB(l);
+
+	//mMesh = Mesh::generaCuboTriangulosRGBparteOpcional(l);
+	//mModelMat = translate(mModelMat, dvec3(l/2, l/2, l/2));
+}
+
+CuboRGB::~CuboRGB()
+{
+	delete mMesh; mMesh = nullptr;
+}
+
+void CuboRGB::render(dmat4 const& modelViewMat) const
+{
+	if (mMesh != nullptr) {
+
 		dmat4 aMat = modelViewMat * mModelMat;  // glm matrix multiplication
 		upload(aMat);
 		mMesh->render();
 	}
 }
 
-void Cubo::update() {
-	mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
+void CuboRGB::update() {
+
+	//mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
+	mModelMat = rotate(dmat4(1.0), radians(90.0), dvec3(0, 0, 1));
 }

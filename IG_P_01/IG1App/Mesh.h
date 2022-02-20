@@ -14,12 +14,10 @@ class Mesh
 public:
 
 	static Mesh* createRGBAxes(GLdouble l); // creates a new 3D-RGB axes mesh
-	static Mesh* createTriangleRGB(); // creates a new 3D-RGB axes mesh
+	static Mesh* createTriangleRGB(GLdouble r); // creates a new 3D-RGB axes mesh
 
 
 	static Mesh* generaPoligonoRegular(GLuint num, GLdouble r); // creates a new 3D-RGB axes mesh
-
-	static Mesh* createTriangleRGBconAltura();
 
 
 	static Mesh* generaRectangulo(GLdouble w, GLdouble h); // creates a new 3D-RGB axes mesh

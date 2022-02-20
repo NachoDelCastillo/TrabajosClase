@@ -66,18 +66,33 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
+//-------------------------------------------------------------------------
+
 // ENTIDAD PARA LOS TRIANGULOS
 
 class TrianglesRGB : public Abs_Entity
 {
+	double circleRadius = 250;
+
+	// Angulo del triangulo respecto a la circunferencia
+	double globalRotateAngle = 0;
+	// Velocidad a la que gira el triangulo respecto a la circunferencia
+	double globalRotateSpeed = -2;
+
+	// Angulo del triangulo
+	double rotateAngle = 0;
+	// Velocidad a la que gira el triangulo sobre si mismo
+	double rotateSpeed = 5;
+
 public:
-	explicit TrianglesRGB();
+	explicit TrianglesRGB(GLdouble r);
 	~TrianglesRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 
 	virtual void update() override;
 };
 
+//-------------------------------------------------------------------------
 
 // RECTANGLE RGB
 class RectanguloRGB : public Abs_Entity
@@ -88,15 +103,41 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 };
 
+//-------------------------------------------------------------------------
 
-// RECTANGLE RGB
+// CUBO
 class Cubo : public Abs_Entity
 {
+	//enum rotAxis {xAxis, yAxis, zAxis};
+
+	//rotAxis currentAxis = xAxis;
+
+	//double xAxis, yAxis, zAxis;
+
 public:
 	explicit Cubo(GLdouble l);
 	~Cubo();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 	
+	virtual void update() override;
+};
+
+//-------------------------------------------------------------------------
+
+// CUBO
+class CuboRGB : public Abs_Entity
+{
+	//enum rotAxis {xAxis, yAxis, zAxis};
+
+	//rotAxis currentAxis = xAxis;
+
+	//double xAxis, yAxis, zAxis;
+
+public:
+	explicit CuboRGB(GLdouble l);
+	~CuboRGB();
+	virtual void render(glm::dmat4 const& modelViewMat) const;
+
 	virtual void update() override;
 };
 

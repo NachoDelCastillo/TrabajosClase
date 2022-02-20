@@ -34,9 +34,6 @@ public:
 
 	void run();    // the main event processing loop
 	void close();  // the application
-
-
-	GLuint mLastUpdateTime = glutGet(GLUT_ELAPSED_TIME);
 	
 protected:
 
@@ -60,6 +57,8 @@ protected:
 	static void s_key(unsigned char key, int x, int y) { s_ig1app.key(key, x, y); };
 	static void s_specialKey(int key, int x, int y) { s_ig1app.specialKey(key, x, y); };
 
+	static void s_update() { s_ig1app.update(); };
+
 	// Viewport position and size
 	Viewport *mViewPort = nullptr;
 	// Camera position, view volume and projection
@@ -71,6 +70,10 @@ protected:
 	int mWinId = 0;	    // window's identifier
 	int mWinW = 800;    // window's width 
 	int mWinH = 600;    // window's height
+
+	GLuint mLastUpdateTime;
+
+	bool activated;
 };
 //-------------------------------------------------------------------------
 
