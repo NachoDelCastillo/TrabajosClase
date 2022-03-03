@@ -1,0 +1,18 @@
+﻿<Page
+    x:Class="Examen_4.Jugar"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Examen_4"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Button  VerticalAlignment="Top" HorizontalAlignment="Left" Width="50" Height="35" Click="Button_Click">
+            <SymbolIcon Symbol="back"/>
+        </Button>
+        <TextBlock Text="{x:Bind CurrentTime,Mode=OneWay}" FontSize="48" FontWeight="ExtraBlack"
+                   VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#FFCD2A2A"/>
+    </Grid>
+</Page>

@@ -72,20 +72,21 @@ public:
 
 class TrianglesRGB : public Abs_Entity
 {
-	double circleRadius = 250;
+	// Distancia a la que va a rotar del centro
+	GLdouble circleRadius;
 
 	// Angulo del triangulo respecto a la circunferencia
-	double globalRotateAngle = 0;
+	GLdouble globalRotateAngle = 0;
 	// Velocidad a la que gira el triangulo respecto a la circunferencia
-	double globalRotateSpeed = -2;
+	GLdouble globalRotateSpeed = -2;
 
 	// Angulo del triangulo
-	double rotateAngle = 0;
+	GLdouble rotateAngle = 0;
 	// Velocidad a la que gira el triangulo sobre si mismo
-	double rotateSpeed = 5;
+	GLdouble rotateSpeed = 5;
 
 public:
-	explicit TrianglesRGB(GLdouble r);
+	explicit TrianglesRGB(GLdouble r, GLdouble _circleRadius);
 	~TrianglesRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
 
@@ -108,18 +109,10 @@ public:
 // CUBO
 class Cubo : public Abs_Entity
 {
-	//enum rotAxis {xAxis, yAxis, zAxis};
-
-	//rotAxis currentAxis = xAxis;
-
-	//double xAxis, yAxis, zAxis;
-
 public:
 	explicit Cubo(GLdouble l);
 	~Cubo();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
-	
-	virtual void update() override;
 };
 
 //-------------------------------------------------------------------------
@@ -127,18 +120,10 @@ public:
 // CUBO
 class CuboRGB : public Abs_Entity
 {
-	//enum rotAxis {xAxis, yAxis, zAxis};
-
-	//rotAxis currentAxis = xAxis;
-
-	//double xAxis, yAxis, zAxis;
-
 public:
 	explicit CuboRGB(GLdouble l);
 	~CuboRGB();
 	virtual void render(glm::dmat4 const& modelViewMat) const;
-
-	virtual void update() override;
 };
 
 #endif //_H_Entities_H_

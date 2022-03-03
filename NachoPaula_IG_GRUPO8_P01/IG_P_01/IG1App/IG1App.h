@@ -71,9 +71,9 @@ protected:
 	int mWinW = 800;    // window's width 
 	int mWinH = 600;    // window's height
 
-	GLuint mLastUpdateTime;
-
-	bool activated;
+	// Variables necesarias para la animacion
+	GLuint mLastUpdateTime = 0;
+	bool activated = false;
 };
 //-------------------------------------------------------------------------
 

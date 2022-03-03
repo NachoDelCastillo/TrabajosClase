@@ -90,14 +90,14 @@ void IG1App::free()
 void IG1App::update() {
 
 	if (activated && mLastUpdateTime + 30 < glutGet(GLUT_ELAPSED_TIME)) {
-		mLastUpdateTime = glutGet(GLUT_ELAPSED_TIME);
-		mScene->update();
-		glutPostRedisplay();
+		mLastUpdateTime = glutGet(GLUT_ELAPSED_TIME); // Actualizar valor
+		mScene->update(); // Actualizar la escena
+		glutPostRedisplay(); // Mostrarlo
 	}
 }
 //-------------------------------------------------------------------------
 
-void IG1App::display() const   
+void IG1App::display() const
 {  // double buffering
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);  // clears the back buffer

@@ -74,12 +74,12 @@ void Poligono::render(dmat4 const& modelViewMat) const
 
 // TRIANGULO RGB
 
-TrianglesRGB::TrianglesRGB(GLdouble r) : Abs_Entity()
+TrianglesRGB::TrianglesRGB(GLdouble r, GLdouble _circleRadius) : Abs_Entity()
 {
 	mMesh = Mesh::createTriangleRGB(r);
 
 	// Decirle al triangulo a que distancia rotar del centro
-	//circleRadius = _circleRadius;
+	circleRadius = _circleRadius;
 }
 
 TrianglesRGB::~TrianglesRGB()
@@ -146,11 +146,7 @@ void RectanguloRGB::render(dmat4 const& modelViewMat) const
 
 Cubo::Cubo(GLdouble l) : Abs_Entity()
 {
-	//mMesh = Mesh::generaCuboTriangulosRGB(l);
 	mMesh = Mesh::generaCubo(l);
-
-	//mMesh = Mesh::generaCuboTriangulosRGBparteOpcional(l);
-	//mModelMat = translate(mModelMat, dvec3(l/2, l/2, l/2));
 }
 
 Cubo::~Cubo()
@@ -178,24 +174,13 @@ void Cubo::render(dmat4 const& modelViewMat) const
 	}
 }
 
-void Cubo::update() {
-
-	//mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
-	mModelMat = rotate(dmat4(1.0), radians(90.0), dvec3(0, 0, 1));
-}
-
-
 //-------------------------------------------------------------------------
 
 // CUBO
 
 CuboRGB::CuboRGB(GLdouble l) : Abs_Entity()
 {
-	//mMesh = Mesh::generaCuboTriangulosRGB(l);
 	mMesh = Mesh::generaCuboTriangulosRGB(l);
-
-	//mMesh = Mesh::generaCuboTriangulosRGBparteOpcional(l);
-	//mModelMat = translate(mModelMat, dvec3(l/2, l/2, l/2));
 }
 
 CuboRGB::~CuboRGB()
@@ -211,10 +196,4 @@ void CuboRGB::render(dmat4 const& modelViewMat) const
 		upload(aMat);
 		mMesh->render();
 	}
-}
-
-void CuboRGB::update() {
-
-	//mModelMat = rotate(mModelMat, radians(2.0), dvec3(0, 0, 1));
-	mModelMat = rotate(dmat4(1.0), radians(90.0), dvec3(0, 0, 1));
 }

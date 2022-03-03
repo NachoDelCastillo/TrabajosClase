@@ -1,0 +1,76 @@
+﻿<Page
+    x:Class="ExamenDSI_1.Config"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ExamenDSI_1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style x:Key="RadioButton_Style" TargetType="RadioButton">
+            <Setter Property="Width" Value="50"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="6*"/>
+        </Grid.ColumnDefinitions>
+
+        <AppBarButton Icon="Back" Click="GoBack"/>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel VerticalAlignment="Center"
+                        HorizontalAlignment="Center" 
+                        Margin="30">
+                <TextBlock FontSize="25">Elige una ciudad</TextBlock>
+                <RadioButton Content="Madrid" Click="OnClick" IsChecked="True" Style="{StaticResource RadioButton_Style}"/>
+                <RadioButton Content="Barcelona" Click="OnClick" Style="{StaticResource RadioButton_Style}"/>
+                <RadioButton Content="Bilbao" Click="OnClick" Style="{StaticResource RadioButton_Style}"/>
+
+            </StackPanel>
+
+            <Grid Grid.Row="1">
+                <TextBlock Margin="20" Name="Descripcion" VerticalAlignment="Center" FontSize="20" TextWrapping="Wrap"> Madrid es una siudad increible no fake cuchillo a 1000 grados y pasa esto</TextBlock>
+            </Grid>
+        </Grid>
+
+        
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <GridView ItemsSource="{x:Bind ListaDrones}" ItemClick="ListView_ItemClick" IsItemClickEnabled="True">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local:dronData">
+                        <StackPanel>
+                            <Image Source="{x:Bind image.Source}" Width="100" Height="100"/>
+                            <TextBlock Text="{x:Bind name}" FontSize="20"/>
+                        </StackPanel>
+                    </DataTemplate>
+
+                </GridView.ItemTemplate>
+            </GridView>
+
+            <Grid Grid.Row="1">
+                <Image Name="Map" Source="Assets/Madrid.png" Stretch="Fill"/>
+                <Image Name="Foto" Source="Assets/StoreLogo.png"
+                       Width="100" Height="100"/>
+            </Grid>
+        </Grid>
+
+
+        </Grid>
+</Page>

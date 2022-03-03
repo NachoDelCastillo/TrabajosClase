@@ -23,11 +23,11 @@ void Scene::init()
 
 		GLdouble radio = 250;
 
-		auto triangleRGB = new TrianglesRGB(50);
+		auto triangleRGB = new TrianglesRGB(50.0, radio);
 		triangleRGB->setModelMat(translate(triangleRGB->modelMat(), dvec3(radio, 0, 0)));
 		gObjects.push_back(triangleRGB);
 
-		gObjects.push_back(new RectanguloRGB(500, radio));
+		gObjects.push_back(new RectanguloRGB(radio*2, radio));
 
 		auto circunferencia = new Poligono(64, radio);
 		circunferencia->setColor(glm::dvec4(1.0, 0, 1.0, 1.0));
